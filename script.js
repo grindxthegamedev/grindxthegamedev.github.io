@@ -3,31 +3,39 @@
 // Carousel Data
 const carouselData = [
     { 
-        image: 'https://via.placeholder.com/200x150/2a2a2a/b68d40?text=Client+1', 
-        url: 'client1.com' 
+        image: 'https://placehold.co/200x150/1a1a1a/b68d40?text=Your+Logo+Here', 
+        url: 'Could be you...' 
     },
     { 
-        image: 'https://via.placeholder.com/200x150/2a2a2a/b68d40?text=Client+2', 
-        url: 'client2.com' 
+        image: 'https://placehold.co/200x150/1a1a1a/b68d40?text=Spot+Available', 
+        url: 'Why not you?' 
     },
     { 
-        image: 'https://via.placeholder.com/200x150/2a2a2a/b68d40?text=Client+3', 
-        url: 'client3.com' 
+        image: 'https://placehold.co/200x150/1a1a1a/b68d40?text=Future+Client', 
+        url: 'Maybe you next?' 
     },
     { 
-        image: 'https://via.placeholder.com/200x150/2a2a2a/b68d40?text=Client+4', 
-        url: 'client4.com' 
+        image: 'https://placehold.co/200x150/1a1a1a/b68d40?text=Reserved+For+You', 
+        url: 'Just saying...' 
     },
     { 
-        image: 'https://via.placeholder.com/200x150/2a2a2a/b68d40?text=Client+5', 
-        url: 'client5.com' 
+        image: 'https://placehold.co/200x150/1a1a1a/b68d40?text=Empty+Until+You', 
+        url: 'Hint hint...' 
     }
 ];
 
 // Initialize Carousel
 function initCarousel() {
     const carousel = document.querySelector('.carousel');
+    if (!carousel) {
+        console.error('Carousel container not found');
+        return;
+    }
     
+    // Clear existing content
+    carousel.innerHTML = '';
+    
+    // Add original items
     carouselData.forEach(client => {
         const item = document.createElement('div');
         item.className = 'carousel-item';
@@ -51,28 +59,15 @@ function initCarousel() {
         const clone = item.cloneNode(true);
         carousel.appendChild(clone);
     });
-}
 
-// Animate Carousel
-function animateCarousel() {
-    const carousel = document.querySelector('.carousel');
-    let position = 0;
-    const speed = 1;
-    
-    function move() {
-        position -= speed;
-        if (position <= -carousel.offsetWidth / 2) {
-            position = 0;
-        }
-        carousel.style.transform = `translateX(${position}px)`;
-        requestAnimationFrame(move);
-    }
-    
-    move();
+    console.log('Carousel initialized with', carousel.children.length, 'items');
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing carousel...');
+    initCarousel();
+
     // Smooth scroll for navigation
     document.querySelectorAll('a[href^="#"], button[data-scroll-to]').forEach(element => {
         element.addEventListener('click', function(e) {
@@ -371,9 +366,6 @@ document.addEventListener('DOMContentLoaded', () => {
             section.style.setProperty('--mouse-y', `${y}%`);
         });
     });
-
-    initCarousel();
-    animateCarousel();
 });
 
 // Add parallax effect to gears
