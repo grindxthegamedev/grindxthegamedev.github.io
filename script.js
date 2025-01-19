@@ -426,39 +426,46 @@ document.querySelectorAll('.skill-gear').forEach(gear => {
     });
 });
 
-// Pattern parallax effect - optimized version
-function updatePatterns() {
-    const sections = document.querySelectorAll('.hero, .trusted, .pricing, .about, .contact');
-    const scrollPosition = window.pageYOffset;
-    const windowHeight = window.innerHeight;
+// Pattern management
+const patterns = {
+    hero: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♠%3C/text%3E%3C/svg%3E",
+    trusted: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E★%3C/text%3E%3C/svg%3E",
+    pricing: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♣%3C/text%3E%3C/svg%3E",
+    about: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♥%3C/text%3E%3C/svg%3E",
+    contact: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♦%3C/text%3E%3C/svg%3E"
+};
 
-    requestAnimationFrame(() => {
-        sections.forEach(section => {
-            const rect = section.getBoundingClientRect();
-            
-            // Only process if section is in viewport
-            if (rect.top < windowHeight && rect.bottom > 0) {
-                const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-                const yOffset = Math.min(progress * 50, 100); // Limit the offset
-                
-                // Use transform instead of background-position for better performance
-                section.style.setProperty('--pattern-offset', `${yOffset}px`);
-            }
-        });
+function updatePattern() {
+    const sections = ['hero', 'trusted', 'pricing', 'about', 'contact'];
+    let currentSection = 'hero';
+
+    sections.forEach(section => {
+        const element = document.querySelector(`.${section}`);
+        if (!element) return;
+
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+            currentSection = section;
+        }
     });
+
+    document.documentElement.style.setProperty(
+        '--current-pattern', 
+        `url("${patterns[currentSection]}")`
+    );
 }
 
-// Throttle scroll events
+// Throttled scroll listener
 let isScrolling = false;
 window.addEventListener('scroll', () => {
     if (!isScrolling) {
-        isScrolling = true;
-        setTimeout(() => {
-            updatePatterns();
+        window.requestAnimationFrame(() => {
+            updatePattern();
             isScrolling = false;
-        }, 16); // Approximately 60fps
+        });
+        isScrolling = true;
     }
 });
 
 // Initial call
-updatePatterns();
+updatePattern();

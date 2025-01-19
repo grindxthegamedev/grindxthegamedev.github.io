@@ -1346,14 +1346,10 @@ footer {
     background-color: rgba(26, 26, 26, 0.98);
 }
 
-/* Card Pattern Base Styles */
-.hero::before,
-.trusted::before,
-.pricing::before,
-.about::before,
-.contact::before {
+/* Single Pattern Background */
+body::before {
     content: '';
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     width: 300%;
@@ -1366,100 +1362,8 @@ footer {
     background-size: 300px 300px;
     background-position: center;
     will-change: transform;
-}
-
-/* Individual Section Patterns */
-.hero::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♠%3C/text%3E%3C/svg%3E");
-}
-
-.trusted::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E★%3C/text%3E%3C/svg%3E");
-}
-
-.pricing::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♣%3C/text%3E%3C/svg%3E");
-}
-
-.about::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♥%3C/text%3E%3C/svg%3E");
-}
-
-.contact::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♦%3C/text%3E%3C/svg%3E");
-}
-
-/* Pattern scroll animation */
-@keyframes patternScroll {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: 300px 300px;
-    }
-}
-
-/* Apply animation to all patterns */
-.hero::before,
-.trusted::before,
-.pricing::before,
-.about::before,
-.contact::before {
+    background-image: var(--current-pattern);
     animation: patternScroll 20s linear infinite;
-}
-
-/* Mouse hover gradient effect */
-.hero::after,
-.trusted::after,
-.pricing:hover::after,
-.about:hover::after,
-.contact:hover::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        rgba(182, 141, 64, 0.15),
-        transparent 5%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    z-index: 2;
-}
-
-/* Hover effects */
-.hero:hover::after,
-.trusted:hover::after,
-.pricing:hover::after,
-.about:hover::after,
-.contact:hover::after {
-    opacity: 1;
-}
-
-/* Content z-indexing */
-.hero-content,
-.trusted > *:not(::before):not(::after),
-.pricing > *:not(::before):not(::after),
-.about > *:not(::before):not(::after),
-.contact > *:not(::before):not(::after) {
-    position: relative;
-    z-index: 3;
-}
-
-/* Pattern animation */
-@keyframes patternFloat {
-    0% {
-        transform: rotate(-45deg) translateY(0);
-    }
-    100% {
-        transform: rotate(-45deg) translateY(100px);
-    }
-}
-
-/* Add this to ensure patterns stay within their sections */
-.hero, .trusted, .pricing, .about, .contact {
-    clip-path: inset(0);
 }
 
 /* Progress bar values */
@@ -1473,4 +1377,24 @@ footer {
 
 .database-progress {
     width: 80%;
+}
+
+/* Pattern scroll animation */
+@keyframes patternScroll {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 300px 300px;
+    }
+}
+
+/* Content z-indexing */
+.hero-content,
+.trusted > *:not(::before):not(::after),
+.pricing > *:not(::before):not(::after),
+.about > *:not(::before):not(::after),
+.contact > *:not(::before):not(::after) {
+    position: relative;
+    z-index: 3;
 }
