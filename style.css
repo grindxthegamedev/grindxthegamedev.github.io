@@ -158,8 +158,6 @@ body {
     opacity: 0.1;
 }
 
-
-
 .hero-content {
     position: relative;
     z-index: 2;
@@ -350,8 +348,6 @@ body {
     overflow: hidden;
 }
 
-
-
 .trusted:hover::before {
     opacity: 0.1;
 }
@@ -498,7 +494,6 @@ body {
     overflow: hidden;
 }
 
-
 .pricing:hover::before {
     opacity: 0.1;
 }
@@ -610,7 +605,6 @@ body {
     position: relative;
     overflow: hidden;
 }
-
 
 .about:hover::before {
     opacity: 0.1;
@@ -810,8 +804,6 @@ body {
     overflow: hidden;
 }
 
-
-
 .discord-card {
     background: linear-gradient(145deg, 
         rgba(26, 26, 26, 0.95),
@@ -936,7 +928,6 @@ footer {
     border-top: 1px solid var(--primary-color);
 }
 
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .about-content {
@@ -965,7 +956,6 @@ footer {
     pointer-events: none;
 }
 
-
 /* Updated hero content styles */
 .hero-content::before {
     content: '';
@@ -983,7 +973,6 @@ footer {
             rgba(182, 141, 64, 0.1) 20px
         );
 }
-
 
 .gear-1-animation, .gear-2-animation {
     display: none;
@@ -1239,16 +1228,27 @@ footer {
     background: var(--primary-color);
     border-radius: 50%;
     filter: blur(1px);
-    animation: mouseSparkFade 0.8s ease-out forwards;
+    animation: mouseSparkFade 1s ease-out forwards;
+    z-index: 9999;
 }
 
 @keyframes mouseSparkFade {
     0% {
-        transform: scale(1);
+        transform: translate(0, 0) scale(1);
         opacity: 1;
     }
+    50% {
+        transform: translate(
+            calc(var(--offset-x) * 1),
+            calc(var(--offset-y) * 1)
+        ) scale(0.8);
+        opacity: 0.8;
+    }
     100% {
-        transform: scale(0);
+        transform: translate(
+            calc(var(--offset-x) * 2),
+            calc(var(--offset-y) * 2)
+        ) scale(0);
         opacity: 0;
     }
 }
@@ -1335,7 +1335,18 @@ footer {
     50% { transform: translateY(-25%) scale(1.2); }
 }
 
-/* Base pattern styles for all sections */
+/* Base section styles */
+.hero,
+.trusted,
+.pricing,
+.about,
+.contact {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(26, 26, 26, 0.98);
+}
+
+/* Card Pattern Base Styles */
 .hero::before,
 .trusted::before,
 .pricing::before,
@@ -1343,81 +1354,123 @@ footer {
 .contact::before {
     content: '';
     position: absolute;
-    inset: -100%;
+    top: 50%;
+    left: 50%;
     width: 300%;
     height: 300%;
-    opacity: 0.08;
+    transform: translate(-50%, -50%);
+    opacity: 0.15;
     pointer-events: none;
-    background-size: 80px 80px;
-    transform: rotate(-45deg);
-    transform-origin: center;
-    z-index: 0;
-    animation: fadePattern 3s ease-in-out infinite;
+    z-index: 1;
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    background-position: center;
+    will-change: transform;
 }
 
-/* Clubs pattern for hero */
+/* Individual Section Patterns with larger SVGs */
 .hero::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext x='20' y='25' font-size='20' fill='%23b68d40' text-anchor='middle'%3E♣%3C/text%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♠%3C/text%3E%3C/svg%3E");
 }
 
-/* Spades pattern for trusted */
 .trusted::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext x='20' y='25' font-size='20' fill='%23b68d40' text-anchor='middle'%3E♠%3C/text%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E★%3C/text%3E%3C/svg%3E");
 }
 
-/* Hearts pattern for pricing */
 .pricing::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext x='20' y='25' font-size='20' fill='%23b68d40' text-anchor='middle'%3E♥%3C/text%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♣%3C/text%3E%3C/svg%3E");
 }
 
-/* Diamonds pattern for about */
 .about::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext x='20' y='25' font-size='20' fill='%23b68d40' text-anchor='middle'%3E♦%3C/text%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♥%3C/text%3E%3C/svg%3E");
 }
 
-/* Stars pattern for contact */
 .contact::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Ctext x='20' y='25' font-size='20' fill='%23b68d40' text-anchor='middle'%3E★%3C/text%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Ctext x='150' y='150' font-size='180' fill='%23463618' text-anchor='middle' dominant-baseline='middle'%3E♦%3C/text%3E%3C/svg%3E");
 }
 
-@keyframes fadePattern {
-    0%, 100% { opacity: 0.05; }
-    50% { opacity: 0.08; }
+/* Pattern scroll animation */
+@keyframes patternScroll {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 300px 300px;
+    }
 }
 
-/* Update progress bar values */
+/* Apply animation to all patterns */
+.hero::before,
+.trusted::before,
+.pricing::before,
+.about::before,
+.contact::before {
+    animation: patternScroll 20s linear infinite;
+}
+
+/* Mouse hover gradient effect */
+.hero::after,
+.trusted::after,
+.pricing:hover::after,
+.about:hover::after,
+.contact:hover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(182, 141, 64, 0.15),
+        transparent 5%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Hover effects */
+.hero:hover::after,
+.trusted:hover::after,
+.pricing:hover::after,
+.about:hover::after,
+.contact:hover::after {
+    opacity: 1;
+}
+
+/* Content z-indexing */
+.hero-content,
+.trusted > *:not(::before):not(::after),
+.pricing > *:not(::before):not(::after),
+.about > *:not(::before):not(::after),
+.contact > *:not(::before):not(::after) {
+    position: relative;
+    z-index: 3;
+}
+
+/* Pattern animation */
+@keyframes patternFloat {
+    0% {
+        transform: rotate(-45deg) translateY(0);
+    }
+    100% {
+        transform: rotate(-45deg) translateY(100px);
+    }
+}
+
+/* Add this to ensure patterns stay within their sections */
+.hero, .trusted, .pricing, .about, .contact {
+    clip-path: inset(0);
+}
+
+/* Progress bar values */
 .frontend-progress {
     width: 95%;
 }
 
 .backend-progress {
-    width: 80%;
+    width: 85%;
 }
 
 .database-progress {
     width: 80%;
-}
-
-/* Update contact section icons */
-.contact-icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.contact-icons i {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    text-shadow: 0 0 20px var(--glow-color);
-}
-
-.contact-icons .fa-discord {
-    font-size: 3rem; /* Slightly larger discord icon */
-}
-
-/* Remove old contact icon styles */
-.contact::after {
-    content: none;
 }

@@ -1,12 +1,4 @@
-import { DotLottie } from '@lottiefiles/dotlottie-web';
-
-const dotLottie1 = new DotLottie({
-    autoplay: true,
-    loop: true,
-    canvas: document.querySelector('#dotlottie-canvas'),
-    src: "<https://lottie.host/b6d0c192-537e-4a77-9b63-5de933ac185a/9Q9Y0L76hC.lottie>", // replace with your .lottie or .json file URL
-});
-
+// import { DotLottie } from '@lottiefiles/dotlottie-web';
 
 // Carousel Data
 const carouselData = [
@@ -81,20 +73,23 @@ function animateCarousel() {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    initCarousel();
-    animateCarousel();
-    
     // Smooth scroll for navigation
     document.querySelectorAll('a[href^="#"], button[data-scroll-to]').forEach(element => {
         element.addEventListener('click', function(e) {
             e.preventDefault();
             
+            // Add console.log for debugging
+            console.log('Scroll click detected');
+            
             // Get target element (either from href or data-scroll-to attribute)
             const targetId = this.getAttribute('href') || this.getAttribute('data-scroll-to');
+            console.log('Target ID:', targetId);
+            
             const targetElement = document.querySelector(targetId);
+            console.log('Target Element:', targetElement);
             
             if (targetElement) {
-                const headerOffset = 80; // Adjust based on your header height
+                const headerOffset = 80;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
@@ -133,27 +128,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     createSmokeEffect();
 
-    // Interactive background effect
-    const hero = document.querySelector('.hero');
-    
-    // Enhanced mouse trail
+    // Enhanced mouse trail effect for all sections
+    const sections = document.querySelectorAll('.hero, .trusted, .pricing, .about, .contact');
     let lastSparkTime = 0;
-    const sparkInterval = 50; // Time between sparks in ms
+    const sparkInterval = 20; // Reduced from 50 to create more frequent sparks
+    
+    sections.forEach(section => {
+        section.addEventListener('mousemove', (e) => {
+            const currentTime = Date.now();
+            if (currentTime - lastSparkTime > sparkInterval) {
+                createMouseSpark(e.clientX, e.clientY);
+                lastSparkTime = currentTime;
+            }
 
-    hero.addEventListener('mousemove', (e) => {
-        const currentTime = Date.now();
-        if (currentTime - lastSparkTime > sparkInterval) {
-            createMouseSpark(e.clientX, e.clientY);
-            lastSparkTime = currentTime;
-        }
-
-        // Update background gradient
-        const rect = hero.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        
-        hero.style.setProperty('--mouse-x', `${x}%`);
-        hero.style.setProperty('--mouse-y', `${y}%`);
+            // Update background gradient
+            const rect = section.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            section.style.setProperty('--mouse-x', `${x}%`);
+            section.style.setProperty('--mouse-y', `${y}%`);
+        });
     });
 
     function createMouseSpark(x, y) {
@@ -162,13 +157,21 @@ document.addEventListener('DOMContentLoaded', () => {
         spark.style.left = `${x}px`;
         spark.style.top = `${y}px`;
         
-        // Random offset
-        const offset = 10;
-        spark.style.setProperty('--offset-x', `${(Math.random() - 0.5) * offset}px`);
-        spark.style.setProperty('--offset-y', `${(Math.random() - 0.5) * offset}px`);
+        // Enhanced random offset
+        const offset = 20; // Increased from 10 for more spread
+        const randomAngle = Math.random() * Math.PI * 2;
+        const randomDistance = Math.random() * offset;
         
-        document.body.appendChild(spark);
-        setTimeout(() => spark.remove(), 800);
+        spark.style.setProperty('--offset-x', `${Math.cos(randomAngle) * randomDistance}px`);
+        spark.style.setProperty('--offset-y', `${Math.sin(randomAngle) * randomDistance}px`);
+        
+        // Create multiple particles for each spark
+        for (let i = 0; i < 3; i++) {
+            const particle = spark.cloneNode(true);
+            particle.style.animationDelay = `${i * 0.1}s`;
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), 800);
+        }
     }
 
     const frame = document.querySelector('.mechanical-frame');
@@ -368,6 +371,9 @@ document.addEventListener('DOMContentLoaded', () => {
             section.style.setProperty('--mouse-y', `${y}%`);
         });
     });
+
+    initCarousel();
+    animateCarousel();
 });
 
 // Add parallax effect to gears
@@ -419,3 +425,40 @@ document.querySelectorAll('.skill-gear').forEach(gear => {
         gear.style.animationDuration = '10s';
     });
 });
+
+// Pattern parallax effect - optimized version
+function updatePatterns() {
+    const sections = document.querySelectorAll('.hero, .trusted, .pricing, .about, .contact');
+    const scrollPosition = window.pageYOffset;
+    const windowHeight = window.innerHeight;
+
+    requestAnimationFrame(() => {
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            
+            // Only process if section is in viewport
+            if (rect.top < windowHeight && rect.bottom > 0) {
+                const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
+                const yOffset = Math.min(progress * 50, 100); // Limit the offset
+                
+                // Use transform instead of background-position for better performance
+                section.style.setProperty('--pattern-offset', `${yOffset}px`);
+            }
+        });
+    });
+}
+
+// Throttle scroll events
+let isScrolling = false;
+window.addEventListener('scroll', () => {
+    if (!isScrolling) {
+        isScrolling = true;
+        setTimeout(() => {
+            updatePatterns();
+            isScrolling = false;
+        }, 16); // Approximately 60fps
+    }
+});
+
+// Initial call
+updatePatterns();
