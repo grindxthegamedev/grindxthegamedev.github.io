@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grindx - Victorian Engineering</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto+Slab:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+</head>
+<body>
+    <!-- Steam particles container -->
+    <div class="steam-particles"></div>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="logo">
+            <span class="gear-icon"><i class="fas fa-cog"></i></span>
+            Grindx
+            <div class="logo-glow"></div>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#trusted">Trusted By</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="mechanical-frame">
+                <!-- Corner Gears -->
+                <div class="frame-corner top-left">
+                    <dotlottie-player
+                        src="https://lottie.host/ac192acc-fad2-46eb-9727-e273e43a3a2b/LcrubCdGur.lottie"
+                        background="transparent"
+                        speed="1"
+                        style="width: 150px; height: 150px;"
+                        loop
+                        autoplay>
+                    </dotlottie-player>
+                </div>
+                <div class="frame-corner top-right">
+                    <dotlottie-player
+                        src="https://lottie.host/ac192acc-fad2-46eb-9727-e273e43a3a2b/LcrubCdGur.lottie"
+                        background="transparent"
+                        speed="1"
+
+                        style="width: 150px; height: 150px;"
+                        loop
+                        autoplay>
+                    </dotlottie-player>
+                </div>
+
+                <!-- Main Content -->
+                <div class="frame-content">
+                    <h1 class="glitch" data-text="GRINDX">Grindx</h1>
+                    <p class="subtitle">Welcome to the goddamn future.</p>
+                    <div class="hero-description">
+                        <i>"Oh, you need a website? Let's make it interesting."</i>
+                    </div>
+                    <button class="cta-button" data-scroll-to="#pricing">
+                        Enter The Workshop.
+                        <div class="button-steam"></div>
+                    </button>
+                </div>
+
+                <!-- Steam Effects -->
+                <div class="steam-vents">
+                    <div class="steam-vent left"></div>
+                    <div class="steam-vent right"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="trusted" class="trusted">
+        <h2>Trusted By</h2>
+        <div class="carousel-container">
+            <div class="carousel">
+                <!-- Carousel items added by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- New Statistics Section -->
+        <div class="achievement-stats">
+            <div class="stat-container">
+                <div class="stat-gear">
+                    <dotlottie-player
+                        src="https://lottie.host/ac192acc-fad2-46eb-9727-e273e43a3a2b/LcrubCdGur.lottie"
+                        background="transparent"
+                        speed="1"
+                        style="width: 80px; height: 80px;"
+                        loop
+                        autoplay>
+                    </dotlottie-player>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" data-target="100">5</div>
+                    <div class="stat-label">Problems Solved (Today)</div>
+                </div>
+                <div class="stat-steam"></div>
+            </div>
+            
+            <div class="stat-container">
+                <div class="stat-gear">
+                    <dotlottie-player
+                        src="https://lottie.host/ac192acc-fad2-46eb-9727-e273e43a3a2b/LcrubCdGur.lottie"
+                        background="transparent"
+                        speed="1"
+                        style="width: 80px; height: 80px;"
+                        loop
+                        autoplay>
+                    </dotlottie-player>
+                </div>
+                <div class="stat-content">
+                    <div class="stat-number" data-target="30">50+</div>
+                    <div class="stat-label">Satisfied Citizens</div>
+                </div>
+                <div class="stat-steam"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <h2>Pricing Plans</h2>
+        <div class="pricing-container">
+            <div class="price-card bronze">
+                <div class="gear-decoration"></div>
+                <h3>Bronze Engine</h3>
+                <div class="price">$999</div>
+                <ul>
+                    <li>Basic Website Design</li>
+                    <li>Mobile Responsive</li>
+                    <li>3 Pages</li>
+                    <li>Basic SEO</li>
+                </ul>
+                <button class="price-button" data-scroll-to="#contact">Select Plan</button>
+            </div>
+            <div class="price-card silver">
+                <div class="gear-decoration"></div>
+                <h3>Silver Turbine</h3>
+                <div class="price">$2499</div>
+                <ul>
+                    <li>Advanced Website Design</li>
+                    <li>Full Responsive Design</li>
+                    <li>7 Pages</li>
+                    <li>Advanced SEO</li>
+                    <li>Custom Animations</li>
+                </ul>
+                <button class="price-button" data-scroll-to="#contact">Select Plan</button>
+            </div>
+            <div class="price-card gold">
+                <div class="reactor-steam">
+                    <div class="steam-particle" style="left: 10px; animation-delay: 0s;"></div>
+                    <div class="steam-particle" style="left: 30px; animation-delay: 0.5s;"></div>
+                    <div class="steam-particle" style="left: 50px; animation-delay: 1s;"></div>
+                </div>
+                <h3>Gold Reactor</h3>
+                <div class="price">$4999</div>
+                <ul>
+                    <li>Premium Website Design</li>
+                    <li>Full-Stack Development</li>
+                    <li>Unlimited Pages</li>
+                    <li>Premium SEO</li>
+                    <li>Custom Animations</li>
+                    <li>E-commerce Integration</li>
+                    <li class="mysterious">??? (Inquire to unlock)</li>
+                </ul>
+                <button class="price-button" data-scroll-to="#contact">Activate Reactor</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2>About The Engineer</h2>
+
+        
+        <div class="about-content">
+            <div class="about-grid">
+                <div class="about-image-container">
+                    <img src="img/hero.jpg" alt="About The Engineer">
+                    <div class="image-frame">
+                        <div class="corner-bolt top-left"></div>
+                        <div class="corner-bolt top-right"></div>
+                        <div class="corner-bolt bottom-left"></div>
+                        <div class="corner-bolt bottom-right"></div>
+                    </div>
+                    <div class="gear-overlay"></div>
+                </div>
+                
+                <div class="about-text">
+                    <div class="text-container">
+                        <h2>Look, here's the deal:</h2>
+                        <p>
+                            <br>
+                            <b>Your website probably sucks.</b><br><br>
+                            <i>Lucky for you, I'm pretty good at fixing that.</i>
+                        </p>
+                        
+                        <div class="expertise-meters">
+                            <div class="meter-container">
+                                <label>Frontend Mastery</label>
+                                <div class="meter">
+                                    <div class="frontend-progress" data-progress="90">
+                                        <div class="gear-indicator"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="meter-container">
+                                <label>Backend Architecture</label>
+                                <div class="meter">
+                                    <div class="backend-progress" data-progress="85">
+                                        <div class="gear-indicator"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="meter-container">
+                                <label>Database Engineering</label>
+                                <div class="meter">
+                                    <div class="database-progress" data-progress="80">
+                                        <div class="gear-indicator"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <h2>Areas of Expertise:</h2>
+            <div class="specialties">
+                
+                <div class="specialty-grid">
+                    <div class="specialty-card">
+                        <div class="specialty-icon">
+                            <dotlottie-player
+                                src="https://lottie.host/ac192acc-fad2-46eb-9727-e273e43a3a2b/LcrubCdGur.lottie"
+                                background="transparent"
+                                speed="1"
+                                style="width: 100px; height: 100px;"
+                                loop
+                                autoplay>
+                            </dotlottie-player>
+                        </div>
+                        <h4>The Usual Suspects</h4>
+                        <p>E-commerce, social media integration, whatever keeps you up at night. I'll handle it.</p>
+                    </div>
+                    <!-- Add more specialty cards as needed -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact The Workshop</h2>
+        <br>
+        <div class="contact-container">
+            <div class="discord-card">
+                <div class="contact-icons">
+                    <i class="fas fa-cog"></i>
+                    <i class="fab fa-discord"></i>
+                    <i class="fas fa-cog"></i>
+                </div>
+                <h3>The Engineer's Discord</h3>
+                <p>Need something fixed? Let's talk.</p>
+                <button class="discord-button">Enter Discord</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="logo">GRINDX</div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#trusted">Trusted By</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Grindx. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
