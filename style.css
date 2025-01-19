@@ -648,7 +648,7 @@ body {
     max-width: 400px;
     margin: 0 auto;
     aspect-ratio: 1 / 1;
-    overflow: hidden;
+    overflow: visible; /* Changed from hidden to show gears */
 }
 
 .about-image-container img {
@@ -658,36 +658,58 @@ body {
     object-position: center;
 }
 
-.image-frame {
-    position: absolute;
-    inset: -20px;
-    border: 2px solid var(--primary-color);
-    border-radius: 15px;
-    pointer-events: none;
-}
-
+/* Corner gears for image */
 .corner-bolt {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    font-size: 5rem;
+    color: var(--primary-color);
+    text-shadow: 0 0 20px var(--glow-color);
+    animation: spin 10s linear infinite;
 }
 
-.corner-bolt::after {
-    content: '';
-    position: absolute;
-    inset: 5px;
-    background: linear-gradient(45deg, var(--gear-color), var(--primary-color));
-    border-radius: 50%;
-    animation: bolt-shine 3s linear infinite;
+.corner-bolt::before {
+    content: '\f013';  /* Font Awesome cog icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
 }
 
-.top-left { top: -15px; left: -15px; }
-.top-right { top: -15px; right: -15px; }
-.bottom-left { bottom: -15px; left: -15px; }
-.bottom-right { bottom: -15px; right: -15px; }
+.corner-bolt.top-left {
+    top: -62px;
+    left: -40px;
+}
+
+.corner-bolt.top-right {
+    top: -62px;
+    right: -40px;
+}
+
+.corner-bolt.bottom-left {
+    bottom: -62px;
+    left: -40px;
+}
+
+.corner-bolt.bottom-right {
+    bottom: -62px;
+    right: -40px;
+}
+
+/* Left side gears spin counter-clockwise */
+.corner-bolt.top-left,
+.corner-bolt.bottom-left {
+    animation-direction: reverse;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Mobile responsiveness for image frame */
+@media (max-width: 768px) {
+    .corner-bolt {
+        font-size: 2.5rem;
+    }
+}
 
 .gear-overlay {
     position: absolute;
