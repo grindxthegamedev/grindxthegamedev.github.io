@@ -366,6 +366,49 @@ document.addEventListener('DOMContentLoaded', () => {
             section.style.setProperty('--mouse-y', `${y}%`);
         });
     });
+
+    // Add click handler for Discord button
+    document.querySelector('.discord-button').addEventListener('click', () => {
+        window.open('https://discord.gg/T6sUuSH78G', '_blank');
+    });
+
+    // Typing effect for subtitle
+    function typeWriter(element, text, speed = 50) {
+        let i = 0;
+        element.innerHTML = '';
+        
+        function type() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            }
+        }
+        
+        type();
+    }
+
+    // Initialize typing effect
+    const subtitle = document.querySelector('.subtitle');
+    if (subtitle) {
+        typeWriter(subtitle, "Engineering doesn't require necessity.");
+    }
+
+    // Add email to contact section
+    const contactContainer = document.querySelector('.contact-container');
+    const emailDiv = document.createElement('div');
+    emailDiv.className = 'email-card';
+    emailDiv.innerHTML = `
+        <div class="contact-icons">
+            <i class="fas fa-cog"></i>
+            <i class="fas fa-envelope"></i>
+            <i class="fas fa-cog"></i>
+        </div>
+        <h3>The Engineer's Email</h3>
+        <p>Alternative communication line.</p>
+        <a href="mailto:quietdronefiverr@gmail.com" class="email-button">Send Email</a>
+    `;
+    contactContainer.appendChild(emailDiv);
 });
 
 // Add parallax effect to gears
@@ -461,3 +504,14 @@ window.addEventListener('scroll', () => {
 
 // Initial call
 updatePattern();
+
+// Steam pressure gauge animation
+function updatePressureGauges() {
+    document.documentElement.style.setProperty('--cpu-pressure', `${30 + Math.random() * 40}%`);
+    document.documentElement.style.setProperty('--memory-pressure', `${20 + Math.random() * 30}%`);
+    document.documentElement.style.setProperty('--network-pressure', `${50 + Math.random() * 40}%`);
+}
+
+// Update gauges periodically
+setInterval(updatePressureGauges, 2000);
+updatePressureGauges(); // Initial update
